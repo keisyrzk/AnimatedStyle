@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let configuration = Styled.Configuration(jellyFactor: 3.0)
-        let styleableNavigationController = window!.rootViewController as! StyledNavigationController
-        transitionHandle = Styled.configure(for: window!, with: styleableNavigationController, using: configuration)
+        let styledNavigationController = window!.rootViewController as! StyledNavigationController
+        transitionHandle = Styled.configure(for: window!, with: styledNavigationController, using: configuration)
         
         
         return true
