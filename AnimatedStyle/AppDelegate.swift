@@ -12,10 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private var transitionHandle: Styled.TransitionHandle!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let configuration = Styled.Configuration(jellyFactor: 3.0)
+        let styleableNavigationController = window!.rootViewController as! StyledNavigationController
+        transitionHandle = Styled.configure(for: window!, with: styleableNavigationController, using: configuration)
+        
+        
         return true
     }
 
