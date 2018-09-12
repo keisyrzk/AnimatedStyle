@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NextViewController.swift
 //  AnimatedStyle
 //
 //  Created by Esteban on 12.09.2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, Stylable {
+class NextViewController: UIViewController, Stylable {
 
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var label1: UILabel!
@@ -19,12 +19,13 @@ class ViewController: UIViewController, Stylable {
     @IBOutlet weak var view3: UIView!
     @IBOutlet weak var label3: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         apply(style: currentStyle)
     }
-    
+
     //style
     private var currentStyle: Style {
         return useDarkMode ? .dark : .light
@@ -35,20 +36,21 @@ class ViewController: UIViewController, Stylable {
     }
 }
 
-extension ViewController {
+
+extension NextViewController {
     
     struct Style {
         let backgroundColor: UIColor
         let titleTextColor: UIColor
         
         static let light = Style(
-            backgroundColor: .white,
-            titleTextColor: .black
+            backgroundColor: .gray,
+            titleTextColor: .white
         )
         
         static let dark = Style(
-            backgroundColor: UIColor(white: 0.2, alpha: 1.0),
-            titleTextColor: .orange
+            backgroundColor: .darkGray,
+            titleTextColor: .red
         )
     }
     

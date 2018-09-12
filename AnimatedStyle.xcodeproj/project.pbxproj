@@ -17,6 +17,7 @@
 		5B83DDC1214932BE00EDD1F5 /* StyledTransitionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83DDBD214932BD00EDD1F5 /* StyledTransitionCoordinator.swift */; };
 		5B83DDC2214932BE00EDD1F5 /* Styled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83DDBE214932BD00EDD1F5 /* Styled.swift */; };
 		5B83DDC52149330F00EDD1F5 /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83DDC42149330F00EDD1F5 /* StyledNavigationController.swift */; };
+		5B83DDC721493F2200EDD1F5 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83DDC621493F2200EDD1F5 /* NextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		5B83DDBD214932BD00EDD1F5 /* StyledTransitionCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTransitionCoordinator.swift; sourceTree = "<group>"; };
 		5B83DDBE214932BD00EDD1F5 /* Styled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styled.swift; sourceTree = "<group>"; };
 		5B83DDC42149330F00EDD1F5 /* StyledNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledNavigationController.swift; sourceTree = "<group>"; };
+		5B83DDC621493F2200EDD1F5 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				5B83DDBA214932BD00EDD1F5 /* Styled */,
 				5B83DDA8214932A600EDD1F5 /* AppDelegate.swift */,
 				5B83DDAA214932A600EDD1F5 /* ViewController.swift */,
+				5B83DDC621493F2200EDD1F5 /* NextViewController.swift */,
 				5B83DDAC214932A600EDD1F5 /* Main.storyboard */,
 				5B83DDAF214932A700EDD1F5 /* Assets.xcassets */,
 				5B83DDB1214932A700EDD1F5 /* LaunchScreen.storyboard */,
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B83DDC52149330F00EDD1F5 /* StyledNavigationController.swift in Sources */,
+				5B83DDC721493F2200EDD1F5 /* NextViewController.swift in Sources */,
 				5B83DDC2214932BE00EDD1F5 /* Styled.swift in Sources */,
 				5B83DDBF214932BE00EDD1F5 /* AnimationUtilities.swift in Sources */,
 				5B83DDC1214932BE00EDD1F5 /* StyledTransitionCoordinator.swift in Sources */,

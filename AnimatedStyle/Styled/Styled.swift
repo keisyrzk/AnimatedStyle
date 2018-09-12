@@ -9,36 +9,40 @@
 import Foundation
 import UIKit
 
-public protocol Stylable {
-
+ protocol Stylable {
     func toggleActiveStyle()
     func styleTransitionWillBegin()
     func styleTransitionDidEnd()
 }
 
-public extension Stylable {
+ extension Stylable {
     func styleTransitionWillBegin() {}
     func styleTransitionDidEnd() {}
 }
 
-public struct Styled {
+enum Style {
+    case Dark
+    case Light
+}
+
+ struct Styled {
     
-    public struct Configuration {
-        public let jellyFactor: Double // the bigger factor the bigger is the border deformation
+     struct Configuration {
+         let jellyFactor: Double // the bigger factor the bigger is the border deformation
         
-        public init(jellyFactor: Double = 1.0) {
+         init(jellyFactor: Double = 1.0) {
             self.jellyFactor = jellyFactor
         }
     }
     
-    public struct TransitionHandle {
+     struct TransitionHandle {
         private let coordinator: StyledTransitionCoordinator
         
         fileprivate init(coordinator: StyledTransitionCoordinator) {
             self.coordinator = coordinator
         }
         
-        public var panGestureRecognizer: UIPanGestureRecognizer {
+         var panGestureRecognizer: UIPanGestureRecognizer {
             return coordinator.panGestureRecognizer
         }
     }
@@ -50,7 +54,7 @@ public struct Styled {
     ///                  the transition is triggered or cancelled.
     /// configuration: The configuration to use for the transition.
 
-    public static func configure(for window: UIWindow, with styleableObject: Stylable, using configuration: Configuration = Configuration()) -> TransitionHandle {
+     static func configure(for window: UIWindow, with styleableObject: Stylable, using configuration: Configuration = Configuration()) -> TransitionHandle {
         let coordinator = StyledTransitionCoordinator(targetView: window, styleableObject: styleableObject, configuration: configuration)
         return TransitionHandle(coordinator: coordinator)
     }

@@ -63,8 +63,8 @@ extension StyledNavigationController: Stylable {
         // toggle their active style. In this example application we've made
         // the child view controller also conform to `GagatStyleable`, but
         // this is not required by Gagat.
-        if let styleableChildViewController = topViewController as? Stylable {
-            styleableChildViewController.toggleActiveStyle()
+        if let stylableChildViewController = topViewController as? Stylable {
+            stylableChildViewController.toggleActiveStyle()
         }
     }
 }

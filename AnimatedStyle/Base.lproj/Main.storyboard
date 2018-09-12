@@ -62,11 +62,20 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3i8-cy-lhF">
+                                                <rect key="frame" x="328" y="163" width="39" height="30"/>
+                                                <state key="normal" title="NEXT"/>
+                                                <connections>
+                                                    <segue destination="ZOq-ha-wgS" kind="show" id="4GJ-SW-caU"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="9eH-fr-MmS" firstAttribute="centerY" secondItem="4y2-eH-Jsy" secondAttribute="centerY" id="4QC-DB-jg0"/>
+                                            <constraint firstAttribute="trailing" secondItem="3i8-cy-lhF" secondAttribute="trailing" constant="8" id="8Bd-ks-fvb"/>
                                             <constraint firstItem="9eH-fr-MmS" firstAttribute="centerX" secondItem="4y2-eH-Jsy" secondAttribute="centerX" id="Ehu-YW-pUc"/>
+                                            <constraint firstAttribute="bottom" secondItem="3i8-cy-lhF" secondAttribute="bottom" constant="8" id="GFM-GY-fmn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -93,6 +102,90 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Next View Controller-->
+        <scene sceneID="v2E-Oe-3Ng">
+            <objects>
+                <viewController id="ZOq-ha-wgS" customClass="NextViewController" customModule="AnimatedStyle" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DND-L2-GeM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="R2l-hu-JT4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MtX-c6-sZa">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dzialki" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihU-2Z-KYg">
+                                                <rect key="frame" x="162.5" y="101.5" width="50.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ihU-2Z-KYg" firstAttribute="centerX" secondItem="MtX-c6-sZa" secondAttribute="centerX" id="RjF-Nn-ogR"/>
+                                            <constraint firstItem="ihU-2Z-KYg" firstAttribute="centerY" secondItem="MtX-c6-sZa" secondAttribute="centerY" id="uZb-Gk-GIM"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrJ-N8-87v">
+                                        <rect key="frame" x="0.0" y="222.5" width="375" height="222"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mieszkania" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWX-dE-a84">
+                                                <rect key="frame" x="145" y="101" width="85" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="gWX-dE-a84" firstAttribute="centerX" secondItem="UrJ-N8-87v" secondAttribute="centerX" id="VgQ-kQ-G51"/>
+                                            <constraint firstItem="gWX-dE-a84" firstAttribute="centerY" secondItem="UrJ-N8-87v" secondAttribute="centerY" id="g14-Ab-2V2"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xeh-lu-KBB">
+                                        <rect key="frame" x="0.0" y="444.5" width="375" height="222.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Domy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHr-1f-cWc">
+                                                <rect key="frame" x="165.5" y="101.5" width="45" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="FHr-1f-cWc" firstAttribute="centerY" secondItem="xeh-lu-KBB" secondAttribute="centerY" id="44z-go-r7S"/>
+                                            <constraint firstItem="FHr-1f-cWc" firstAttribute="centerX" secondItem="xeh-lu-KBB" secondAttribute="centerX" id="Byz-NO-i2B"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="R2l-hu-JT4" firstAttribute="leading" secondItem="DND-L2-GeM" secondAttribute="leading" id="FdR-WV-7PI"/>
+                            <constraint firstItem="R2l-hu-JT4" firstAttribute="top" secondItem="DND-L2-GeM" secondAttribute="top" id="T95-gF-L8a"/>
+                            <constraint firstItem="NcP-VA-b9I" firstAttribute="bottom" secondItem="R2l-hu-JT4" secondAttribute="bottom" id="ejt-N7-IYi"/>
+                            <constraint firstItem="NcP-VA-b9I" firstAttribute="trailing" secondItem="R2l-hu-JT4" secondAttribute="trailing" id="md9-Ej-ZN0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NcP-VA-b9I"/>
+                    </view>
+                    <connections>
+                        <outlet property="label1" destination="ihU-2Z-KYg" id="5H7-3N-JhF"/>
+                        <outlet property="label2" destination="gWX-dE-a84" id="hD0-qq-Tq2"/>
+                        <outlet property="label3" destination="FHr-1f-cWc" id="6b3-Ce-Jga"/>
+                        <outlet property="view1" destination="MtX-c6-sZa" id="g0l-Zh-4WK"/>
+                        <outlet property="view2" destination="UrJ-N8-87v" id="2YV-iT-4s9"/>
+                        <outlet property="view3" destination="xeh-lu-KBB" id="BGf-TY-fap"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9la-jH-tWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="828" y="659"/>
         </scene>
         <!--Styled Navigation Controller-->
         <scene sceneID="RZH-Mh-G4w">
