@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let configuration = Styled.Configuration(jellyFactor: 3.0)
         let styledNavigationController = window!.rootViewController as! StyledNavigationController
-        transitionHandle = Styled.configure(for: window!, with: styledNavigationController, using: configuration)
+        transitionHandle = Styled.shared.configure(for: window!, with: styledNavigationController, using: configuration)
         
         
         return true

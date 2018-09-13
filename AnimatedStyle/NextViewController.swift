@@ -23,16 +23,11 @@ class NextViewController: UIViewController, Stylable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        apply(style: currentStyle)
-    }
-
-    //style
-    private var currentStyle: Style {
-        return useDarkMode ? .dark : .light
     }
     
-    private var useDarkMode = false {
-        didSet { apply(style: currentStyle) }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        apply(Styled.shared.currentStyle)
     }
 }
 
@@ -53,8 +48,19 @@ extension NextViewController {
             titleTextColor: .red
         )
     }
-    
-    func apply(style: Style) {
+
+    private func apply(_ type: StyleType) {
+        
+        var style: Style
+        
+        switch type {
+            
+        case .Dark:
+            style = .dark
+        case .Light:
+            style = .light
+        }
+        
         view1.backgroundColor = style.backgroundColor
         label1.textColor = style.titleTextColor
         
@@ -65,7 +71,7 @@ extension NextViewController {
         label3.textColor = style.titleTextColor
     }
     
-    func toggleActiveStyle() {
-        useDarkMode = !useDarkMode
+    func toggleActiveStyle(type: StyleType) {
+        apply(type)
     }
 }

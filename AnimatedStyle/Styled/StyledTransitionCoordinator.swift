@@ -22,16 +22,16 @@ class StyledTransitionCoordinator: NSObject {
     fileprivate let targetView: UIView
     
     fileprivate let configuration: Styled.Configuration
-    private let styleableObject: Stylable
+    private let stylableObject: Stylable
     
     private(set) var panGestureRecognizer: PessimisticPanGestureRecognizer!
     
     fileprivate var state = State.idle
     
-    init(targetView: UIView, styleableObject: Stylable, configuration: Styled.Configuration) {
+    init(targetView: UIView, stylableObject: Stylable, configuration: Styled.Configuration) {
         self.targetView = targetView
         self.configuration = configuration
-        self.styleableObject = styleableObject
+        self.stylableObject = stylableObject
         
         super.init()
         
@@ -87,7 +87,7 @@ class StyledTransitionCoordinator: NSObject {
     private func beginInteractiveStyleTransition(withPanRecognizer panRecognizer: PessimisticPanGestureRecognizer) {
         
         // Inform our object that we're about to start a transition.
-        styleableObject.styleTransitionWillBegin()
+        stylableObject.styleTransitionWillBegin()
         
         // We snapshot the targetView before applying the new style, and make sure
         // it's positioned on top of all the other content.
@@ -106,7 +106,8 @@ class StyledTransitionCoordinator: NSObject {
         // Now we're free to apply the new style. This won't be visible until
         // the user pans more since the snapshot is displayed on top of the
         // actual content.
-        styleableObject.toggleActiveStyle()
+        Styled.shared.useDarkMode = !Styled.shared.useDarkMode  //automated change between two styles
+        stylableObject.toggleActiveStyle(type: Styled.shared.currentStyle)
         
         // Finally we make our first adjustment to the mask layer based on the
         // values of the pan recognizer.
@@ -206,10 +207,10 @@ class StyledTransitionCoordinator: NSObject {
     }
     
     private func cancelInteractiveStyleTransitionWithoutAnimation() {
-        styleableObject.toggleActiveStyle()
+        stylableObject.toggleActiveStyle(type: Styled.shared.currentStyle)
         cleanupAfterInteractiveStyleTransition()
         state = .idle
-        styleableObject.styleTransitionDidEnd()
+        stylableObject.styleTransitionDidEnd()
     }
     
     private func cancelInteractiveStyleTransition(withVelocity velocity: CGPoint) {
@@ -223,10 +224,10 @@ class StyledTransitionCoordinator: NSObject {
         // location (which means that the entire previous style snapshot is shown), then
         // reset the style to the previous style and remove the snapshot.
         animate(snapshotMaskLayer, to: .zero, withVelocity: velocity) {
-            self.styleableObject.toggleActiveStyle()
+            self.stylableObject.toggleActiveStyle(type: Styled.shared.currentStyle)
             self.cleanupAfterInteractiveStyleTransition()
             self.state = .idle
-            self.styleableObject.styleTransitionDidEnd()
+            self.stylableObject.styleTransitionDidEnd()
         }
     }
     
@@ -246,7 +247,7 @@ class StyledTransitionCoordinator: NSObject {
         animate(snapshotMaskLayer, to: targetLocation, withVelocity: velocity) {
             self.cleanupAfterInteractiveStyleTransition()
             self.state = .idle
-            self.styleableObject.styleTransitionDidEnd()
+            self.stylableObject.styleTransitionDidEnd()
         }
     }
     
