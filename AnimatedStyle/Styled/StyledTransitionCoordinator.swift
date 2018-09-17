@@ -26,6 +26,7 @@ class StyledTransitionCoordinator: NSObject {
     
     private(set) var panGestureRecognizer: PessimisticPanGestureRecognizer!
     var chosenDirection: PanDirection = .down
+    private let hillHeight: CGFloat = 100
     
     fileprivate var state = State.idle
     
@@ -348,7 +349,6 @@ class StyledTransitionCoordinator: NSObject {
     private func adjustMaskLayerPath(shouldApplyRandomCurve: Bool) {
         let maskingPath = UIBezierPath()
         
-        let hillHeight: CGFloat = 100
         let hillPosX: CGFloat = UIScreen.main.bounds.width/2
         let hillPosY: CGFloat = UIScreen.main.bounds.height/2
         
@@ -475,11 +475,11 @@ class StyledTransitionCoordinator: NSObject {
         case .down:
             targetLocation = CGPoint(x: 0.0, y: targetView.bounds.maxY)
         case .up:
-            targetLocation = CGPoint(x: 0.0, y: -targetView.bounds.maxY)
+            targetLocation = CGPoint(x: 0.0, y: -targetView.bounds.maxY - hillHeight)
         case .right:
             targetLocation = CGPoint(x: targetView.frame.maxX, y: 0.0)
         case .left:
-            targetLocation = CGPoint(x: -targetView.frame.maxX, y: 0.0)
+            targetLocation = CGPoint(x: -targetView.frame.maxX - hillHeight, y: 0.0)
         }
         
         animate(snapshotMaskLayer, to: targetLocation, withVelocity: .zero) {
