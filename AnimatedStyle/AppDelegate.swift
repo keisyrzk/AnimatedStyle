@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private var transitionHandle: Styled.TransitionHandle!
+    var transitionHandle: Styled.TransitionHandle!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = Styled.Configuration(jellyFactor: 3.0)
         let styledNavigationController = window!.rootViewController as! StyledNavigationController
         transitionHandle = Styled.shared.configure(for: window!, with: styledNavigationController, using: configuration)
-        
+        Styled.shared.useDarkMode = !Styled.shared.useDarkMode
         
         return true
     }

@@ -28,6 +28,11 @@ class ViewController: UIViewController, Stylable {
         super.viewWillAppear(animated)
         apply(Styled.shared.currentStyle)
     }
+    @IBAction func changeStyle(_ sender: Any) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.transitionHandle.coordinator.performAniamtion()
+    }
 }
 
 extension ViewController {

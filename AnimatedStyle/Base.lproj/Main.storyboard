@@ -69,6 +69,13 @@
                                                     <segue destination="ZOq-ha-wgS" kind="show" id="4GJ-SW-caU"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26e-2K-Yie">
+                                                <rect key="frame" x="10" y="161" width="65" height="30"/>
+                                                <state key="normal" title="ANIMATE"/>
+                                                <connections>
+                                                    <action selector="changeStyle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-7G-UfF"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -76,6 +83,8 @@
                                             <constraint firstAttribute="trailing" secondItem="3i8-cy-lhF" secondAttribute="trailing" constant="8" id="8Bd-ks-fvb"/>
                                             <constraint firstItem="9eH-fr-MmS" firstAttribute="centerX" secondItem="4y2-eH-Jsy" secondAttribute="centerX" id="Ehu-YW-pUc"/>
                                             <constraint firstAttribute="bottom" secondItem="3i8-cy-lhF" secondAttribute="bottom" constant="8" id="GFM-GY-fmn"/>
+                                            <constraint firstAttribute="bottom" secondItem="26e-2K-Yie" secondAttribute="bottom" constant="10" id="q1g-Y0-6Np"/>
+                                            <constraint firstItem="26e-2K-Yie" firstAttribute="leading" secondItem="4y2-eH-Jsy" secondAttribute="leading" constant="10" id="uG8-bd-GjQ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -185,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9la-jH-tWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="659"/>
+            <point key="canvasLocation" x="1518" y="427"/>
         </scene>
         <!--Styled Navigation Controller-->
         <scene sceneID="RZH-Mh-G4w">

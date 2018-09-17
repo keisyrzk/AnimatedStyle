@@ -82,7 +82,7 @@ class Styled {
     }
     
     struct TransitionHandle {
-        private let coordinator: StyledTransitionCoordinator
+        let coordinator: StyledTransitionCoordinator
         
         fileprivate init(coordinator: StyledTransitionCoordinator) {
             self.coordinator = coordinator
