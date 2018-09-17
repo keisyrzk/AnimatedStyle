@@ -5,7 +5,3 @@ Use the pan gesture to change the style globally in your app. You can configure 
 
 
 ![alt text](Sample/sample.gif "")
-
-
-![alt text](Screenshots/1.png "")
-![alt text](Screenshots/2.png "")
