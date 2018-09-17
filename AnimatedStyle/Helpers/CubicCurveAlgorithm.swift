@@ -186,15 +186,36 @@ extension CGFloat {
 
 extension UIBezierPath {
     
-    func addRandomCurve(to: CGPoint) {
+    enum CurveAnimationDirection {
+        case Down
+        case Up
+        case Left
+        case Right
+    }
+    
+    func addRandomCurve(from: CGPoint, to: CGPoint, curveDirection: CurveAnimationDirection, hillHeight: Int) {
         
-        var points: [CGPoint] = [CGPoint(x: 0, y: 0)]
+        var points: [CGPoint] = []
+        points.append(from)
         
-        let numberOfPoints = Helpers.getRandomInRange(from: 1, to: 5)
-        let stepRange = Int(to.x / CGFloat(numberOfPoints))
+        let numberOfPoints = Helpers.getRandomInRange(from: 1, to: 10)
+        let stepRange = curveDirection == .Down || curveDirection == .Up ? Int(to.x / CGFloat(numberOfPoints)) : Int(to.y / CGFloat(numberOfPoints))
+        
         for _ in 0 ..< numberOfPoints {
-            points.append(CGPoint(x: Int(points.last!.x) + stepRange,
-                                  y: Helpers.getRandomInRange(from: 0, to: 100)))
+            switch curveDirection {
+            case .Down:
+                points.append(CGPoint(x: Int(points.last!.x) + stepRange,
+                                      y: Helpers.getRandomInRange(from: 0, to: hillHeight)))
+            case .Up:
+                points.append(CGPoint(x: Int(points.last!.x) + stepRange,
+                                      y: Helpers.getRandomInRange(from: Int(UIScreen.main.bounds.height), to: Int(UIScreen.main.bounds.height) - hillHeight)))
+            case .Left:
+                points.append(CGPoint(x: Helpers.getRandomInRange(from: Int(UIScreen.main.bounds.width), to: Int(UIScreen.main.bounds.width) - hillHeight),
+                                      y: Int(points.last!.y) + stepRange))
+            case .Right:
+                points.append(CGPoint(x: Helpers.getRandomInRange(from: 0, to: hillHeight),
+                                      y: Int(points.last!.y) + stepRange))
+            }
         }
         
         let controlPoints = CubicCurveAlgorithm().controlPointsFromPoints(dataPoints: points)

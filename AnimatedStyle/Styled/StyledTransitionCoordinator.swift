@@ -359,8 +359,12 @@ class StyledTransitionCoordinator: NSObject {
             maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.minY))
             
             // ...arc to top-right corner..
-            maskingPath.addRandomCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY))
-//            maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY), controlPoint: CGPoint(x: hillPosX, y: hillHeight))
+            if shouldApplyRandomCurve {
+                maskingPath.addRandomCurve(from: CGPoint(x: targetView.frame.minX, y: targetView.bounds.minY), to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY), curveDirection: .Down, hillHeight: Int(hillHeight))
+            }
+            else {
+                maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY), controlPoint: CGPoint(x: hillPosX, y: hillHeight))
+            }
 
             // ...to bottom-right corner...
             maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.maxY))
@@ -376,7 +380,12 @@ class StyledTransitionCoordinator: NSObject {
             maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.frame.maxY))
             
             // ...arc to bottom-right corner..
-            maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY), controlPoint: CGPoint(x: hillPosX, y: UIScreen.main.bounds.height - hillHeight))
+            if shouldApplyRandomCurve {
+                maskingPath.addRandomCurve(from: CGPoint(x: targetView.frame.minX, y: targetView.frame.maxY), to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY), curveDirection: .Up, hillHeight: Int(UIScreen.main.bounds.height) - Int(hillHeight))
+            }
+            else {
+                maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY), controlPoint: CGPoint(x: hillPosX, y: UIScreen.main.bounds.height - hillHeight))
+            }
             
             // ...to top-right corner...
             maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.minY))
@@ -388,33 +397,44 @@ class StyledTransitionCoordinator: NSObject {
             maskingPath.close()
             
         case .left:
-            // bottom-right corner...
-            maskingPath.move(to: CGPoint(x: targetView.frame.maxX, y: targetView.frame.maxY))
+            // top-right corner...
+            maskingPath.move(to: CGPoint(x: targetView.frame.maxX, y: targetView.frame.minY))
             
-            // ...arc to top-right corner...
-            maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.maxX, y: targetView.bounds.minY), controlPoint: CGPoint(x: UIScreen.main.bounds.width - hillHeight, y: hillPosY))
-            
-            // ...to top-left corner...
-            maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.bounds.minY))
+            // ...arc to bottom-right corner...
+            if shouldApplyRandomCurve {
+                maskingPath.addRandomCurve(from: CGPoint(x: targetView.frame.maxX, y: targetView.frame.minY), to: CGPoint(x: targetView.frame.maxX, y: targetView.bounds.maxY), curveDirection: .Left, hillHeight: Int(UIScreen.main.bounds.width) - Int(hillHeight))
+            }
+            else {
+                maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.maxX, y: targetView.bounds.maxY), controlPoint: CGPoint(x: UIScreen.main.bounds.width - hillHeight, y: hillPosY))
+            }
             
             // ...to bottom-left corner...
-            maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.frame.maxY))
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.bounds.maxY))
+            
+            // ...to top-left corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.frame.minY))
             
             // ...and close the path.
             maskingPath.close()
             
         case .right:
-            // bottom-left corner...
-            maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.frame.maxY))
+
+            // top-left corner...
+            maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.frame.minY))
             
-            // ...arc to top-left corner...
-            maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.minY), controlPoint: CGPoint(x: hillHeight, y: hillPosY))
-            
-            // ...to top-right corner...
-            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.minY))
+            // ...arc to bottom-left corner...
+            if shouldApplyRandomCurve {
+                maskingPath.addRandomCurve(from: CGPoint(x: targetView.frame.minX, y: targetView.frame.minY), to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.maxY), curveDirection: .Right, hillHeight: Int(hillHeight))
+            }
+            else {
+                maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.maxY), controlPoint: CGPoint(x: hillHeight, y: hillPosY))
+            }
             
             // ...to bottom-right corner...
-            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY))
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.maxY))
+            
+            // ...to top-right corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY))
             
             // ...and close the path.
             maskingPath.close()
