@@ -31,7 +31,7 @@ class ViewController: UIViewController, Stylable {
     @IBAction func changeStyle(_ sender: Any) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.transitionHandle.coordinator.performAniamtion()
+        appDelegate.transitionHandle.coordinator.performAniamtion(shouldApplyRandomCurve: true)
     }
 }
 

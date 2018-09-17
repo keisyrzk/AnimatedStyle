@@ -202,7 +202,7 @@ class StyledTransitionCoordinator: NSObject {
             let damping = configuration.jellyFactor > 0.0 ? CGFloat(45.0 / configuration.jellyFactor) : 0.0
             let verticalOffset = damping > 0.0 ? panRecognizer.velocity(in: targetView).y / damping : 0.0
             let horizontalTouchLocation = panRecognizer.location(in: targetView).x
-            maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY), controlPoint: CGPoint(x: horizontalTouchLocation, y: verticalOffset))
+            maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY), controlPoint: CGPoint(x: horizontalTouchLocation, y: UIScreen.main.bounds.height - verticalOffset))
 
             // ...to top-right corner...
             maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.minY))
@@ -221,7 +221,7 @@ class StyledTransitionCoordinator: NSObject {
             let damping = configuration.jellyFactor > 0.0 ? CGFloat(45.0 / configuration.jellyFactor) : 0.0
             let horizontalOffset = damping > 0.0 ? panRecognizer.velocity(in: targetView).x / damping : 0.0
             let verticalTouchLocation = panRecognizer.location(in: targetView).y
-            maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.maxX, y: targetView.bounds.minY), controlPoint: CGPoint(x: horizontalOffset, y: verticalTouchLocation))
+            maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.maxX, y: targetView.bounds.minY), controlPoint: CGPoint(x: UIScreen.main.bounds.width - horizontalOffset, y: verticalTouchLocation))
 
             // ...to top-left corner...
             maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.bounds.minY))
@@ -259,8 +259,6 @@ class StyledTransitionCoordinator: NSObject {
         let velocity = panRecognizer.velocity(in: targetView)
         let translation = panRecognizer.translation(in: targetView)
         
-        let isMovingDownwards = velocity.y > 0.0
-        
         let hasPassedDownThreshold = translation.y > targetView.bounds.midY
         let hasPassedUpThreshold = translation.y < targetView.bounds.midY
         let hasPassedRightThreshold = translation.x > targetView.bounds.midX
@@ -276,7 +274,6 @@ class StyledTransitionCoordinator: NSObject {
         // The transition to the new style should be completed if the user is panning
         // downwards or if they've panned enough that more than half of the new view
         // is already shown.
-//        let shouldCompleteTransition = isMovingDownwards || hasPassedThreshold
         let shouldCompleteTransition = goDown || goUp || goLeft || goRight
 
         if shouldCompleteTransition {
@@ -330,11 +327,11 @@ class StyledTransitionCoordinator: NSObject {
         case .down:
             targetLocation = CGPoint(x: 0.0, y: targetView.bounds.maxY)
         case .up:
-            targetLocation = CGPoint(x: 0.0, y: targetView.bounds.minY)
+            targetLocation = CGPoint(x: 0.0, y: -targetView.bounds.maxY)
         case .right:
             targetLocation = CGPoint(x: targetView.frame.maxX, y: 0.0)
         case .left:
-            targetLocation = CGPoint(x: targetView.frame.minX, y: 0.0)
+            targetLocation = CGPoint(x: -targetView.frame.maxX, y: 0.0)
         }
         
         animate(snapshotMaskLayer, to: targetLocation, withVelocity: velocity) {
@@ -344,9 +341,90 @@ class StyledTransitionCoordinator: NSObject {
         }
     }
     
-    func performAniamtion() {
+    
+    
+    // AUTOMATED ANIMATION
+    
+    private func adjustMaskLayerPath(shouldApplyRandomCurve: Bool) {
+        let maskingPath = UIBezierPath()
         
-        chosenDirection = .right
+        let hillHeight: CGFloat = 100
+        let hillPosX: CGFloat = UIScreen.main.bounds.width/2
+        let hillPosY: CGFloat = UIScreen.main.bounds.height/2
+        
+        switch chosenDirection {
+            
+        case .down:
+            // Top-left corner...
+            maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.minY))
+            
+            // ...arc to top-right corner..
+            maskingPath.addRandomCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY))
+//            maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.minY), controlPoint: CGPoint(x: hillPosX, y: hillHeight))
+
+            // ...to bottom-right corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.maxY))
+            
+            // ...to bottom-left corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.maxY))
+            
+            // ...and close the path.
+            maskingPath.close()
+            
+        case .up:
+            // bottom-left corner...
+            maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.frame.maxY))
+            
+            // ...arc to bottom-right corner..
+            maskingPath.addQuadCurve(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY), controlPoint: CGPoint(x: hillPosX, y: UIScreen.main.bounds.height - hillHeight))
+            
+            // ...to top-right corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.minY))
+            
+            // ...to top-left corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.minY))
+            
+            // ...and close the path.
+            maskingPath.close()
+            
+        case .left:
+            // bottom-right corner...
+            maskingPath.move(to: CGPoint(x: targetView.frame.maxX, y: targetView.frame.maxY))
+            
+            // ...arc to top-right corner...
+            maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.maxX, y: targetView.bounds.minY), controlPoint: CGPoint(x: UIScreen.main.bounds.width - hillHeight, y: hillPosY))
+            
+            // ...to top-left corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.bounds.minY))
+            
+            // ...to bottom-left corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.minX, y: targetView.frame.maxY))
+            
+            // ...and close the path.
+            maskingPath.close()
+            
+        case .right:
+            // bottom-left corner...
+            maskingPath.move(to: CGPoint(x: targetView.frame.minX, y: targetView.frame.maxY))
+            
+            // ...arc to top-left corner...
+            maskingPath.addQuadCurve(to: CGPoint(x: targetView.frame.minX, y: targetView.bounds.minY), controlPoint: CGPoint(x: hillHeight, y: hillPosY))
+            
+            // ...to top-right corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.bounds.minY))
+            
+            // ...to bottom-right corner...
+            maskingPath.addLine(to: CGPoint(x: targetView.bounds.maxX, y: targetView.frame.maxY))
+            
+            // ...and close the path.
+            maskingPath.close()
+        }
+        
+        snapshotMaskLayer?.path = maskingPath.cgPath
+    }
+    
+    func performAniamtion(shouldApplyRandomCurve: Bool) {
+        
         stylableObject.styleTransitionWillBegin()
         
         previousStyleTargetViewSnapshot = targetView.snapshotView(afterScreenUpdates: false)
@@ -360,6 +438,8 @@ class StyledTransitionCoordinator: NSObject {
         
         Styled.shared.useDarkMode = !Styled.shared.useDarkMode  //automated change between two styles
         stylableObject.toggleActiveStyle(type: Styled.shared.currentStyle)
+        
+        adjustMaskLayerPath(shouldApplyRandomCurve: shouldApplyRandomCurve)
         
         state = .tracking
         
@@ -375,11 +455,11 @@ class StyledTransitionCoordinator: NSObject {
         case .down:
             targetLocation = CGPoint(x: 0.0, y: targetView.bounds.maxY)
         case .up:
-            targetLocation = CGPoint(x: 0.0, y: targetView.bounds.minY)
+            targetLocation = CGPoint(x: 0.0, y: -targetView.bounds.maxY)
         case .right:
             targetLocation = CGPoint(x: targetView.frame.maxX, y: 0.0)
         case .left:
-            targetLocation = CGPoint(x: targetView.frame.minX, y: 0.0)
+            targetLocation = CGPoint(x: -targetView.frame.maxX, y: 0.0)
         }
         
         animate(snapshotMaskLayer, to: targetLocation, withVelocity: .zero) {
@@ -415,8 +495,6 @@ extension StyledTransitionCoordinator: UIGestureRecognizerDelegate {
         let translation = panRecognizer.translation(in: targetView)
         let panningAngle: Degrees = atan2(Double(translation.y), Double(translation.x)) * 360 / (Double.pi * 2)
         let panningDirection = direction(for: panningAngle)
-        
-        chosenDirection = .right
         
         return panningDirection == chosenDirection
     }
