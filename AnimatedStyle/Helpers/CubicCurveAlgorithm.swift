@@ -218,6 +218,8 @@ extension UIBezierPath {
             }
         }
         
+        points.append(to)
+        
         let controlPoints = CubicCurveAlgorithm().controlPointsFromPoints(dataPoints: points)
         
         for i in 0 ..< points.count {

@@ -18,14 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QpC-AG-Wfx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="29"/>
+                                <segments>
+                                    <segment title="Down"/>
+                                    <segment title="Up"/>
+                                    <segment title="Right"/>
+                                    <segment title="Left"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="7Pv-5d-IDN"/>
+                                </connections>
+                            </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-o7-hZO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="573"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4I0-gl-mOO">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="201"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wroclaw" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsl-aa-IDJ">
-                                                <rect key="frame" x="155" y="91" width="65.5" height="20.5"/>
+                                                <rect key="frame" x="155" y="86" width="65.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -38,10 +50,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylk-pg-0lw">
-                                        <rect key="frame" x="0.0" y="201" width="375" height="201"/>
+                                        <rect key="frame" x="0.0" y="191" width="375" height="191"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gdansk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMm-hU-36F">
-                                                <rect key="frame" x="158.5" y="91" width="58.5" height="20.5"/>
+                                                <rect key="frame" x="158.5" y="86" width="58.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -54,23 +66,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4y2-eH-Jsy">
-                                        <rect key="frame" x="0.0" y="402" width="375" height="201"/>
+                                        <rect key="frame" x="0.0" y="382" width="375" height="191"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Krakow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eH-fr-MmS">
-                                                <rect key="frame" x="159.5" y="91" width="56.5" height="20.5"/>
+                                                <rect key="frame" x="159.5" y="86" width="56.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3i8-cy-lhF">
-                                                <rect key="frame" x="328" y="163" width="39" height="30"/>
+                                                <rect key="frame" x="328" y="153" width="39" height="30"/>
                                                 <state key="normal" title="NEXT"/>
                                                 <connections>
                                                     <segue destination="ZOq-ha-wgS" kind="show" id="4GJ-SW-caU"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26e-2K-Yie">
-                                                <rect key="frame" x="10" y="161" width="65" height="30"/>
+                                                <rect key="frame" x="10" y="151" width="65" height="30"/>
                                                 <state key="normal" title="ANIMATE"/>
                                                 <connections>
                                                     <action selector="changeStyle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ayN-7G-UfF"/>
@@ -92,10 +104,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="QpC-AG-Wfx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W7O-ix-TNh"/>
                             <constraint firstItem="6rs-o7-hZO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bYG-Iz-Lee"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6rs-o7-hZO" secondAttribute="trailing" id="lri-6m-hK0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6rs-o7-hZO" secondAttribute="bottom" id="ne2-bk-nYU"/>
-                            <constraint firstItem="6rs-o7-hZO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vh4-ab-JeN"/>
+                            <constraint firstItem="QpC-AG-Wfx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sYo-Hd-fFW"/>
+                            <constraint firstItem="6rs-o7-hZO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="vh4-ab-JeN"/>
+                            <constraint firstItem="QpC-AG-Wfx" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xfd-P5-jao"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -104,6 +119,7 @@
                         <outlet property="label1" destination="wsl-aa-IDJ" id="Z4P-BY-pSa"/>
                         <outlet property="label2" destination="UMm-hU-36F" id="IXJ-Vw-ldS"/>
                         <outlet property="label3" destination="9eH-fr-MmS" id="E45-nA-6gm"/>
+                        <outlet property="segemnedControl" destination="QpC-AG-Wfx" id="SNI-EB-Yzg"/>
                         <outlet property="view1" destination="4I0-gl-mOO" id="Cc0-45-Xri"/>
                         <outlet property="view2" destination="ylk-pg-0lw" id="taS-MQ-x4z"/>
                         <outlet property="view3" destination="4y2-eH-Jsy" id="gZ6-rq-gGx"/>
@@ -111,6 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="540" y="182"/>
         </scene>
         <!--Next View Controller-->
         <scene sceneID="v2E-Oe-3Ng">

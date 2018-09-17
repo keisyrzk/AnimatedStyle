@@ -25,7 +25,7 @@ class StyledTransitionCoordinator: NSObject {
     private let stylableObject: Stylable
     
     private(set) var panGestureRecognizer: PessimisticPanGestureRecognizer!
-    private var chosenDirection: PanDirection = .down
+    var chosenDirection: PanDirection = .down
     
     fileprivate var state = State.idle
     
@@ -499,7 +499,7 @@ class StyledTransitionCoordinator: NSObject {
 extension StyledTransitionCoordinator: UIGestureRecognizerDelegate {
     private typealias Degrees = Double
     
-    private enum PanDirection {
+    enum PanDirection {
         case up, down, left, right
     }
     

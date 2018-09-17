@@ -18,6 +18,8 @@ class ViewController: UIViewController, Stylable {
     
     @IBOutlet weak var view3: UIView!
     @IBOutlet weak var label3: UILabel!
+        
+    @IBOutlet weak var segemnedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,30 @@ class ViewController: UIViewController, Stylable {
         super.viewWillAppear(animated)
         apply(Styled.shared.currentStyle)
     }
+    
     @IBAction func changeStyle(_ sender: Any) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.transitionHandle.coordinator.performAniamtion(shouldApplyRandomCurve: true)
+    }
+    
+    @IBAction func segmentDidChange(_ sender: UISegmentedControl) {
+        
+        let coordinator = (UIApplication.shared.delegate as! AppDelegate).transitionHandle.coordinator
+        
+        switch sender.selectedSegmentIndex {
+            
+        case 0:
+            coordinator.chosenDirection = .down
+        case 1:
+            coordinator.chosenDirection = .up
+        case 2:
+            coordinator.chosenDirection = .right
+        case 3:
+            coordinator.chosenDirection = .left
+        default:
+            break
+        }
     }
 }
 
@@ -40,15 +62,18 @@ extension ViewController {
     struct Style {
         let backgroundColor: UIColor
         let titleTextColor: UIColor
+        let segmentedTint: UIColor
         
         static let light = Style(
             backgroundColor: .white,
-            titleTextColor: .black
+            titleTextColor: .black,
+            segmentedTint: .darkGray
         )
         
         static let dark = Style(
             backgroundColor: UIColor(white: 0.2, alpha: 1.0),
-            titleTextColor: .orange
+            titleTextColor: .orange,
+            segmentedTint: .orange
         )
     }
     
@@ -72,6 +97,10 @@ extension ViewController {
         
         view3.backgroundColor = style.backgroundColor
         label3.textColor = style.titleTextColor
+        
+        self.view.backgroundColor = style.backgroundColor
+        
+        segemnedControl.tintColor = style.segmentedTint
     }
     
     func toggleActiveStyle(type: StyleType) {
